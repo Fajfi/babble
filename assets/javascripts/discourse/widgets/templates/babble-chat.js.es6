@@ -6,20 +6,25 @@ export default Ember.Object.create({
     this.topic           = this.widget.attrs.topic
     this.availableTopics = this.widget.attrs.availableTopics || []
     if (!this.topic) { return }
-    return this.chatContents()
+    return this.chatContents(widget.attrs)
   },
 
-  chatContents() {
-    return [
-      h('div.babble-title-wrapper', h('div.babble-title', [
-        this.chatTitle(),
-        this.visibilityButton(),
-        this.exchangeTopicsButton()
-      ])),
+  chatContents(attrs) {
+    let contents = [
       h('div.babble-list', { attributes: { 'scroll-container': 'inactive' } }, h('ul', {className: 'babble-posts'}, this.chatView())),
       this.widget.attach('babble-notifications', { notifications: this.topic.notifications }),
       this.widget.attach('babble-composer', { topic: this.topic })
     ]
+    if (attrs && !attrs.hideTitle) {
+      contents.unshift(
+        h('div.babble-title-wrapper', h('div.babble-title', [
+          this.chatTitle(),
+          this.visibilityButton(),
+          this.exchangeTopicsButton()
+        ]))
+      )
+    }
+    return contents
   },
 
   chatTitle() {

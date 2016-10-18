@@ -1,9 +1,0 @@
-<div class="chat">
-  {{#if topic.id}}
-    <div class="chat-pane">
-      {{mount-widget widget="babble-chat" args=(as-hash topic=topic)}}
-    </div>
-  {{else}}
-    {{loading-spinner}}
-  {{/if}}
-</div>

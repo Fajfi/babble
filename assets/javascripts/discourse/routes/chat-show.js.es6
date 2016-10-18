@@ -77,7 +77,7 @@ export default Discourse.Route.extend({
     if (this._categoryList) {
       this.render('discovery/categories', { into: 'discovery', outlet: 'header-list-container', model: this._categoryList });
     }
-    this.render('chat', { into: 'discovery', outlet: 'list-container', controller: 'chat' });
+    this.render('fullpage-chat', { into: 'discovery', outlet: 'list-container', controller: 'chat' });
   },
 
   deactivate() {
